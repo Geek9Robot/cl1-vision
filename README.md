@@ -70,31 +70,41 @@ Cortical Labs is now scaling their **Cortical Cloud** - racks of 30 interconnect
 
 ### Current Pipeline
 
-```
-Token Discovery → Hard Filters → Smart Wallet Enrichment → Grok-4 Decision → Execute Trade
-     (scan)        (technical)      (on-chain signals)        (LLM reasoning)    (swap)
+```mermaid
+graph LR
+    A["Token Discovery<br/><i>scan</i>"] --> B["Hard Filters<br/><i>technical</i>"]
+    B --> C["Smart Wallet Enrichment<br/><i>on-chain signals</i>"]
+    C --> D["Grok-4 Decision<br/><i>LLM reasoning</i>"]
+    D --> E["Execute Trade<br/><i>swap</i>"]
+
+    style A fill:#1a1a2e,stroke:#e94560,color:#fff
+    style B fill:#1a1a2e,stroke:#e94560,color:#fff
+    style C fill:#1a1a2e,stroke:#e94560,color:#fff
+    style D fill:#0f3460,stroke:#e94560,color:#fff
+    style E fill:#16213e,stroke:#0f3460,color:#fff
 ```
 
 ### New Pipeline With Biological Layer
 
-```
-Token Discovery → Hard Filters → Smart Wallet Enrichment
-                                        ↓
-                              ┌─────────┴─────────┐
-                              ↓                    ↓
-                          Grok-4 LLM        CL1 Organoid
-                         (reasoning)      (biological instinct)
-                              ↓                    ↓
-                              └─────────┬─────────┘
-                                        ↓
-                                Consensus Engine
-                                  (both agree?)
-                                    ↓      ↓
-                                  YES      NO
-                                   ↓        ↓
-                               Execute    Veto
-                                           ↓
-                                  "The neurons said no."
+```mermaid
+graph TD
+    A["Token Discovery"] --> B["Hard Filters"]
+    B --> C["Smart Wallet Enrichment"]
+    C --> D["Grok-4 LLM<br/><i>reasoning</i>"]
+    C --> E["CL1 Organoid<br/><i>biological instinct</i>"]
+    D --> F{"Consensus Engine<br/>both agree?"}
+    E --> F
+    F -->|YES| G["Execute Trade"]
+    F -->|NO| H["Veto<br/><i>'The neurons said no.'</i>"]
+
+    style A fill:#1a1a2e,stroke:#e94560,color:#fff
+    style B fill:#1a1a2e,stroke:#e94560,color:#fff
+    style C fill:#1a1a2e,stroke:#e94560,color:#fff
+    style D fill:#0f3460,stroke:#533483,color:#fff
+    style E fill:#2d6a4f,stroke:#40916c,color:#fff
+    style F fill:#533483,stroke:#e94560,color:#fff
+    style G fill:#16213e,stroke:#0f3460,color:#fff
+    style H fill:#6a040f,stroke:#e94560,color:#fff
 ```
 
 The organoid evaluates **in parallel** with Grok-4 - not sequentially. Both receive the same candidate data. A **consensus mechanism** requires agreement before execution, and the organoid holds **veto power** - if the neurons don't fire in a confident pattern, the trade is killed regardless of what the AI thinks.
@@ -182,18 +192,40 @@ The endgame question: **can conditioned biological neurons develop a genuine edg
 
 ### Connection Architecture
 
-```
-┌─────────────────────┐         ┌──────────────────────┐
-│   Grok Robot        │         │   Cortical Cloud     │
-│   (TypeScript)      │         │   (Python / CL API)  │
-│                     │  HTTP/  │                      │
-│  Trading Loop ──────┤──WS───►│  Organoid Service    │
-│                     │         │   ├─ Encoder         │
-│  Consensus Engine ◄─┤─────────┤   ├─ Stimulator      │
-│                     │         │   ├─ Spike Reader     │
-│  Conditioning ──────┤────────►│   └─ Conditioner     │
-│  (post-trade P&L)   │         │                      │
-└─────────────────────┘         └──────────────────────┘
+```mermaid
+graph LR
+    subgraph GR["Grok Robot (TypeScript)"]
+        TL["Trading Loop"]
+        CE["Consensus Engine"]
+        CD["Conditioning<br/><i>post-trade P&L</i>"]
+    end
+
+    subgraph CC["Cortical Cloud (Python / CL API)"]
+        OS["Organoid Service"]
+        EN["Encoder"]
+        ST["Stimulator"]
+        SR["Spike Reader"]
+        CO["Conditioner"]
+        OS --- EN
+        OS --- ST
+        OS --- SR
+        OS --- CO
+    end
+
+    TL -- "HTTP / WS" --> OS
+    OS -- "GO / NO-GO" --> CE
+    CD -- "reward / punish" --> CO
+
+    style GR fill:#1a1a2e,stroke:#0f3460,color:#fff
+    style CC fill:#1b2a1b,stroke:#2d6a4f,color:#fff
+    style TL fill:#0f3460,stroke:#533483,color:#fff
+    style CE fill:#0f3460,stroke:#533483,color:#fff
+    style CD fill:#0f3460,stroke:#533483,color:#fff
+    style OS fill:#2d6a4f,stroke:#40916c,color:#fff
+    style EN fill:#2d6a4f,stroke:#40916c,color:#fff
+    style ST fill:#2d6a4f,stroke:#40916c,color:#fff
+    style SR fill:#2d6a4f,stroke:#40916c,color:#fff
+    style CO fill:#2d6a4f,stroke:#40916c,color:#fff
 ```
 
 We'll build a **Python microservice** that wraps the CL1 API and exposes a simple interface to our TypeScript trading bot:
