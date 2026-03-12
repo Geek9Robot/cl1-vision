@@ -1,4 +1,25 @@
-# Teaching Living Neurons to Trade Crypto: Our Roadmap to Biological Trading Intelligence
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/Geek9Robot/grok-pidog-project/main/logo.png" alt="Grok PiDog" width="200"/>
+
+# Teaching Living Neurons to Trade Crypto
+### Our Roadmap to Biological Trading Intelligence
+
+[![Solana](https://img.shields.io/badge/Solana-000000?style=for-the-badge&logo=solana&logoColor=white)](https://solana.com)
+[![Cortical Labs](https://img.shields.io/badge/Cortical_Labs-CL1_Cloud-blueviolet?style=for-the-badge)](https://corticallabs.com)
+[![Grok-4](https://img.shields.io/badge/Powered_by-Grok--4-blue?style=for-the-badge)](https://x.ai)
+[![Live on Stream](https://img.shields.io/badge/Live-On_Stream-red?style=for-the-badge&logo=youtube&logoColor=white)](#)
+[![Status](https://img.shields.io/badge/Status-In_Discussion_with_CL-brightgreen?style=for-the-badge)](#)
+[![DishBrain](https://img.shields.io/badge/Based_on-DishBrain_Research-orange?style=for-the-badge)](https://pubmed.ncbi.nlm.nih.gov/36228614/)
+[![Biological Computing](https://img.shields.io/badge/Biological-Neural_Network-ff69b4?style=for-the-badge)](#)
+
+---
+
+*A robot dog. Powered by AI. Consulting living human neurons. Trading memecoins on Solana.*
+
+</div>
+
+---
 
 ## The Vision
 
